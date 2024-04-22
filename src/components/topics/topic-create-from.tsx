@@ -11,7 +11,9 @@ import * as actions from "@/actions";
 import { useFormState } from "react-dom";
 
 export default function TopicCreateForm() {
-  const [formState, action] = useFormState(actions.CreateTopic, 5);
+  const [formState, action] = useFormState(actions.CreateTopic, {
+    errors: {},
+  });
   return (
     <Popover placement="left">
       <PopoverTrigger>
@@ -26,12 +28,17 @@ export default function TopicCreateForm() {
               label="Name"
               labelPlacement="outside"
               placeholder="Enter name"
+              isInvalid={!!formState.errors.name}
+              errorMessage={formState.errors.name?.join(",")}
             />
+
             <Textarea
               name="description"
               label="Description"
               labelPlacement="outside"
               placeholder="Enter description"
+              isInvalid={!!formState.errors.description}
+              errorMessage={formState.errors.description?.join(",")}
             />
             <Button type="submit" color="primary">
               Save
