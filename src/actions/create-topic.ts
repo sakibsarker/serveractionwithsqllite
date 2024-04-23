@@ -31,6 +31,8 @@ export async function CreateTopic(
 ): Promise<CreateTopicFormState> {
   const session = await auth();
 
+  await new Promise((resolve) => setTimeout(resolve, 2500));
+
   const result = createTopicSchema.safeParse({
     name: formData.get("name"),
     description: formData.get("description"),
